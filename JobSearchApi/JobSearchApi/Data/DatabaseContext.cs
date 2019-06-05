@@ -16,17 +16,17 @@ namespace JobSearchApi.Data
         /// Default constructor
         /// </summary>
         /// <param name="options">Options for the database context</param>
-        public DatabaseContext(DbContextOptions options) : base(options) { }
+        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
 
         /// <summary>
         /// A person
         /// </summary>
-        public virtual DbSet<Person> Person { get; set; }
+        public virtual DbSet<Person> Persons { get; set; }
 
         /// <summary>
         /// The profile belonging to a person
         /// </summary>
-        public virtual DbSet<PersonProfile> PersonProfile { get; set; }
+        public virtual DbSet<PersonProfile> PersonProfiles { get; set; }
 
     }
 }

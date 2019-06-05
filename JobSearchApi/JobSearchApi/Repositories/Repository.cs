@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using JobSearchApi.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace JobSearchApi
         /// <summary>
         /// The database context
         /// </summary>
-        private DbContext _context;
+        private DatabaseContext _context;
 
         /// <summary>
         /// The database table
@@ -26,7 +27,7 @@ namespace JobSearchApi
         /// Default constructor
         /// </summary>
         /// <param name="context">The database context</param>
-        public Repository(DbContext context)
+        public Repository(DatabaseContext context)
         {
             _context = context;
             _table = context.Set<T>();

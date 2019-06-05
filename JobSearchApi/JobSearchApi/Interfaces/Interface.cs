@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JobSearchApi.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -56,7 +57,10 @@ namespace JobSearchApi
     /// </summary>
     public interface IUnitOfWork : IDisposable
     {
-        //IRepository<T> Repository { get; }
+        IRepository<Person> PersonRepository { get; }
+
+        IRepository<PersonProfile> PersonProfileRepository { get; }
+
         void Save();
     }
     #endregion

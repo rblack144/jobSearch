@@ -9,18 +9,18 @@
             The database context
             </summary>
         </member>
-        <member name="M:JobSearchApi.Data.DatabaseContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions)">
+        <member name="M:JobSearchApi.Data.DatabaseContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{JobSearchApi.Data.DatabaseContext})">
             <summary>
             Default constructor
             </summary>
             <param name="options">Options for the database context</param>
         </member>
-        <member name="P:JobSearchApi.Data.DatabaseContext.Person">
+        <member name="P:JobSearchApi.Data.DatabaseContext.Persons">
             <summary>
             A person
             </summary>
         </member>
-        <member name="P:JobSearchApi.Data.DatabaseContext.PersonProfile">
+        <member name="P:JobSearchApi.Data.DatabaseContext.PersonProfiles">
             <summary>
             The profile belonging to a person
             </summary>
@@ -30,7 +30,7 @@
             A person
             </summary>
         </member>
-        <member name="P:JobSearchApi.Entities.Person.ID">
+        <member name="P:JobSearchApi.Entities.Person.Id">
             <summary>
             The system id of the person
             </summary>
@@ -55,7 +55,7 @@
             The profile belonging to a person
             </summary>
         </member>
-        <member name="P:JobSearchApi.Entities.PersonProfile.ID">
+        <member name="P:JobSearchApi.Entities.PersonProfile.Id">
             <summary>
             The system id of the profile
             </summary>
@@ -138,7 +138,7 @@
             The database table
             </summary>
         </member>
-        <member name="M:JobSearchApi.Repository`1.#ctor(Microsoft.EntityFrameworkCore.DbContext)">
+        <member name="M:JobSearchApi.Repository`1.#ctor(JobSearchApi.Data.DatabaseContext)">
             <summary>
             Default constructor
             </summary>
@@ -190,7 +190,7 @@
             The database context
             </summary>
         </member>
-        <member name="M:JobSearchApi.UnitOfWork.#ctor(Microsoft.EntityFrameworkCore.DbContext)">
+        <member name="M:JobSearchApi.UnitOfWork.#ctor(JobSearchApi.Data.DatabaseContext)">
             <summary>
             Default constructor
             </summary>

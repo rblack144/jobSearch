@@ -17,7 +17,7 @@ namespace JobSearchApi.Entities
         /// The system id of the person
         /// </summary>
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// The first name of the person
@@ -50,7 +50,7 @@ namespace JobSearchApi.Entities
         /// The system id of the profile
         /// </summary>
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// The system id of the person to whom this profile belong
