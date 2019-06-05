@@ -18,9 +18,15 @@ namespace JobSearchApi
         /// </summary>
         private DatabaseContext _context;
 
+        /// <summary>
+        /// The person repository
+        /// </summary>
         private IRepository<Person> _personRepository;
 
-        private IRepository<PersonProfile> _personProfileRepository;
+        /// <summary>
+        /// The person job search repository
+        /// </summary>
+        private IRepository<PersonJobSearch> _personJobSearchRepository;
 
         /// <summary>
         /// Default constructor
@@ -31,11 +37,17 @@ namespace JobSearchApi
             _context = context;
         }
 
+        /// <summary>
+        /// The person repository
+        /// </summary>
         public IRepository<Person> PersonRepository =>
             _personRepository ?? (_personRepository = new Repository<Person>(_context));
 
-        public IRepository<PersonProfile> PersonProfileRepository =>
-            _personProfileRepository ?? (_personProfileRepository = new Repository<PersonProfile>(_context));
+        /// <summary>
+        /// The person job search repository
+        /// </summary>
+        public IRepository<PersonJobSearch> PersonJobSearchRepository =>
+            _personJobSearchRepository ?? (_personJobSearchRepository = new Repository<PersonJobSearch>(_context));
 
         /// <summary>
         /// Save the data

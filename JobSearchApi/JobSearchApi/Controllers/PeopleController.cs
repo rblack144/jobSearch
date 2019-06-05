@@ -10,24 +10,40 @@ using JobSearchApi.Entities;
 
 namespace JobSearchApi.Controllers
 {
+    /// <summary>
+    /// Endpoint to manage people
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class PeopleController : ControllerBase
     {
+        /// <summary>
+        /// The unit of work
+        /// </summary>
         private readonly IUnitOfWork _unitOfWork;
 
+        /// <summary>
+        /// Defafault constructor
+        /// </summary>
+        /// <param name="unitOfWork">The unit of work</param>
         public PeopleController(IUnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
 
-
-        // GET: api/People
+        /// <summary>
+        /// Get's a list of all the people
+        /// </summary>
+        /// <returns>The list of all persons</returns>
         [HttpGet]
-        public IEnumerable<Person> GetPersons()
-        {
-            return _unitOfWork.PersonRepository.GetAll();
-        }
+        public IEnumerable<Person> GetPersons() => _unitOfWork.PersonRepository.GetAll();
 
-        // GET: api/People/5
+        /// <summary>
+        /// Get's the person with the specified system id
+        /// </summary>
+        /// <param name="id">The system id of the person</param>
+        /// <returns>The person if found</returns>
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(Person), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult GetPerson([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -44,8 +60,15 @@ namespace JobSearchApi.Controllers
             return Ok(person);
         }
 
-        // PUT: api/People/5
+        /// <summary>
+        /// Update the specified person
+        /// </summary>
+        /// <param name="id">The system id of the person to update</param>
+        /// <param name="person">The objected containing the updated data</param>
+        /// <returns>The status code 204 if successful</returns>
         [HttpPut("{id}")]
+        [ProducesResponseType(typeof(Person), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> PutPerson([FromRoute] int id, [FromBody] Person person)
         {
             if (!ModelState.IsValid)
@@ -59,30 +82,17 @@ namespace JobSearchApi.Controllers
             }
 
             _unitOfWork.PersonRepository.Update(person);
-
-            //_unitOfWork.Entry(person).State = EntityState.Modified;
-
-            //try
-            //{
-            //    await _unitOfWork.SaveChangesAsync();
-            //}
-            //catch (DbUpdateConcurrencyException)
-            //{
-            //    if (!PersonExists(id))
-            //    {
-            //        return NotFound();
-            //    }
-            //    else
-            //    {
-            //        throw;
-            //    }
-            //}
-
             return NoContent();
         }
 
-        // POST: api/People
+        /// <summary>
+        /// Creates the specified person
+        /// </summary>
+        /// <param name="person">The person to be created</param>
+        /// <returns>The system id of the person that was created</returns>
         [HttpPost]
+        [ProducesResponseType(typeof(Person), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult PostPerson([FromBody] Person person)
         {
             if (!ModelState.IsValid)
@@ -91,13 +101,18 @@ namespace JobSearchApi.Controllers
             }
 
             _unitOfWork.PersonRepository.Insert(person);
-            //await _unitOfWork.SaveChangesAsync();
-
-            return CreatedAtAction("GetPerson", new { id = person.Id }, person);
+            return CreatedAtAction(nameof(GetPerson), new { id = person.Id }, person);
         }
 
-        // DELETE: api/People/5
+        /// <summary>
+        /// Delete's the person with the specified id
+        /// </summary>
+        /// <param name="id">They system id of the person to delete</param>
+        /// <returns>The person that was deleted</returns>
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(Person), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult DeletePerson([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -112,14 +127,7 @@ namespace JobSearchApi.Controllers
             }
 
             _unitOfWork.PersonRepository.Delete(person);
-            //await _unitOfWork.SaveChangesAsync();
-
             return Ok(person);
         }
-
-        //private bool PersonExists(int id)
-        //{
-        //    return _unitOfWork.Persons.Any(e => e.Id == id);
-        //}
     }
 }

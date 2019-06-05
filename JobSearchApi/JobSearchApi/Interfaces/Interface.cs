@@ -57,10 +57,19 @@ namespace JobSearchApi
     /// </summary>
     public interface IUnitOfWork : IDisposable
     {
+        /// <summary>
+        /// The person repository
+        /// </summary>
         IRepository<Person> PersonRepository { get; }
 
-        IRepository<PersonProfile> PersonProfileRepository { get; }
+        /// <summary>
+        /// The person job search repository
+        /// </summary>
+        IRepository<PersonJobSearch> PersonJobSearchRepository { get; }
 
+        /// <summary>
+        /// Save the data to the database
+        /// </summary>
         void Save();
     }
     #endregion
