@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using JobSearchApi.Data;
 using JobSearchApi.Entities;
+using JobSearchApi.Utilities;
 
 namespace JobSearchApi.Controllers
 {
@@ -100,6 +101,11 @@ namespace JobSearchApi.Controllers
                 return BadRequest(ModelState);
             }
 
+            // Hash the password
+            string originalPassword = person.Profile.Password;
+            person.Profile.Password = Utility.HashPassword(originalPassword);
+
+            // Save the user
             _unitOfWork.PersonRepository.Insert(person);
             return CreatedAtAction(nameof(GetPerson), new { id = person.Id }, person);
         }
@@ -120,12 +126,14 @@ namespace JobSearchApi.Controllers
                 return BadRequest(ModelState);
             }
 
+            // Get the person to delete
             var person = _unitOfWork.PersonRepository.GetById(id);
             if (person == null)
             {
                 return NotFound();
             }
 
+            // Delete the person
             _unitOfWork.PersonRepository.Delete(person);
             return Ok(person);
         }

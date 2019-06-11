@@ -28,5 +28,29 @@ namespace JobSearchApi.Data
         /// </summary>
         public virtual DbSet<PersonProfile> PersonProfiles { get; set; }
 
+        /// <summary>
+        /// The type of jobs
+        /// </summary>
+        public virtual DbSet<JobType> JobTypes { get; set; }
+
+        /// <summary>
+        /// The job searches belonging to a person
+        /// </summary>
+        public virtual DbSet<PersonJobSearch> PersonJobSearches { get; set; }
+
+        /// <summary>
+        /// Specify how models should be created
+        /// </summary>
+        /// <param name="modelBuilder">The model builder</param>
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Seed the jobs table
+            modelBuilder.Entity<JobType>().HasData(
+                new JobType { Id = 1, Description = "Full Time" },
+                new JobType { Id = 2, Description = "Part Time"},
+                new JobType { Id = 3, Description = "Contract" }
+                );
+        }
+
     }
 }

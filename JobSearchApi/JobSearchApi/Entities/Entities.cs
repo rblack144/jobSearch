@@ -114,7 +114,7 @@ namespace JobSearchApi.Entities
         /// <summary>
         /// The job type
         /// </summary>
-        public virtual JobTypes JobType { get; set; }
+        public virtual JobType JobType { get; set; }
 
         /// <summary>
         /// The person
@@ -127,7 +127,7 @@ namespace JobSearchApi.Entities
     /// <summary>
     /// The types of jobs
     /// </summary>
-    public class JobTypes
+    public class JobType
     {
         /// <summary>
         /// The system id

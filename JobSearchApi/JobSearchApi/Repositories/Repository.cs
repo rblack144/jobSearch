@@ -37,20 +37,14 @@ namespace JobSearchApi
         /// Get all the data
         /// </summary>
         /// <returns>The list of objects</returns>
-        public IEnumerable<T> GetAll()
-        {
-            return _table.ToList();
-        }
+        public IEnumerable<T> GetAll() => _table.ToList();
 
         /// <summary>
         /// Get the item by the given id
         /// </summary>
         /// <param name="id">The id of the item to retrieve</param>
         /// <returns>The item, if it exists</returns>
-        public T GetById(object id)
-        {
-            return _table.Find(id);
-        }
+        public T GetById(object id) => _table.Find(id);
 
         /// <summary>
         /// Insert the given entity
@@ -59,6 +53,7 @@ namespace JobSearchApi
         public void Insert(T entity)
         {
             _table.Add(entity);
+            Save();
         }
 
         /// <summary>
@@ -84,9 +79,6 @@ namespace JobSearchApi
         /// <summary>
         /// Save the data
         /// </summary>
-        public void Save()
-        {
-            _context.SaveChanges();
-        }
+        public void Save() => _context.SaveChanges();
     }
 }

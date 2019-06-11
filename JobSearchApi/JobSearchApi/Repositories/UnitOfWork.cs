@@ -32,10 +32,8 @@ namespace JobSearchApi
         /// Default constructor
         /// </summary>
         /// <param name="context">The database object</param>
-        public UnitOfWork(DatabaseContext context)
-        {
-            _context = context;
-        }
+        public UnitOfWork(DatabaseContext context) => _context = context;
+
 
         /// <summary>
         /// The person repository
@@ -52,17 +50,11 @@ namespace JobSearchApi
         /// <summary>
         /// Save the data
         /// </summary>
-        public void Save()
-        {
-            _context.SaveChanges();
-        }
+        public void Save() => _context.SaveChanges();
 
         /// <summary>
         /// Dispose the object
         /// </summary>
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
+        public void Dispose() => _context.Dispose();
     }
 }

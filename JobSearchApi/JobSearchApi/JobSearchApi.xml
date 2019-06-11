@@ -4,6 +4,86 @@
         <name>JobSearchApi</name>
     </assembly>
     <members>
+        <member name="T:JobSearchApi.Controllers.JobsController">
+            <summary>
+            The jobs endpoint
+            </summary>
+        </member>
+        <member name="F:JobSearchApi.Controllers.JobsController._unitOfWork">
+            <summary>
+            The unit of work
+            </summary>
+        </member>
+        <member name="M:JobSearchApi.Controllers.JobsController.#ctor(JobSearchApi.IUnitOfWork)">
+            <summary>
+            Default constructor
+            </summary>
+            <param name="unitOfWork">The unit of work</param>
+        </member>
+        <member name="M:JobSearchApi.Controllers.JobsController.Get">
+            <summary>
+            Gets and returns a list of all the job searches
+            </summary>
+            <returns>The list of job searches</returns>
+        </member>
+        <member name="M:JobSearchApi.Controllers.JobsController.Get(System.Int32)">
+            <summary>
+            Get's the job search by id
+            </summary>
+            <param name="id">The system id of the job</param>
+            <returns>The job search entry</returns>
+        </member>
+        <member name="T:JobSearchApi.Controllers.PeopleController">
+            <summary>
+            Endpoint to manage people
+            </summary>
+        </member>
+        <member name="F:JobSearchApi.Controllers.PeopleController._unitOfWork">
+            <summary>
+            The unit of work
+            </summary>
+        </member>
+        <member name="M:JobSearchApi.Controllers.PeopleController.#ctor(JobSearchApi.IUnitOfWork)">
+            <summary>
+            Defafault constructor
+            </summary>
+            <param name="unitOfWork">The unit of work</param>
+        </member>
+        <member name="M:JobSearchApi.Controllers.PeopleController.GetPersons">
+            <summary>
+            Get's a list of all the people
+            </summary>
+            <returns>The list of all persons</returns>
+        </member>
+        <member name="M:JobSearchApi.Controllers.PeopleController.GetPerson(System.Int32)">
+            <summary>
+            Get's the person with the specified system id
+            </summary>
+            <param name="id">The system id of the person</param>
+            <returns>The person if found</returns>
+        </member>
+        <member name="M:JobSearchApi.Controllers.PeopleController.PutPerson(System.Int32,JobSearchApi.Entities.Person)">
+            <summary>
+            Update the specified person
+            </summary>
+            <param name="id">The system id of the person to update</param>
+            <param name="person">The objected containing the updated data</param>
+            <returns>The status code 204 if successful</returns>
+        </member>
+        <member name="M:JobSearchApi.Controllers.PeopleController.PostPerson(JobSearchApi.Entities.Person)">
+            <summary>
+            Creates the specified person
+            </summary>
+            <param name="person">The person to be created</param>
+            <returns>The system id of the person that was created</returns>
+        </member>
+        <member name="M:JobSearchApi.Controllers.PeopleController.DeletePerson(System.Int32)">
+            <summary>
+            Delete's the person with the specified id
+            </summary>
+            <param name="id">They system id of the person to delete</param>
+            <returns>The person that was deleted</returns>
+        </member>
         <member name="T:JobSearchApi.Data.DatabaseContext">
             <summary>
             The database context
@@ -24,6 +104,22 @@
             <summary>
             The profile belonging to a person
             </summary>
+        </member>
+        <member name="P:JobSearchApi.Data.DatabaseContext.JobTypes">
+            <summary>
+            The type of jobs
+            </summary>
+        </member>
+        <member name="P:JobSearchApi.Data.DatabaseContext.PersonJobSearches">
+            <summary>
+            The job searches belonging to a person
+            </summary>
+        </member>
+        <member name="M:JobSearchApi.Data.DatabaseContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Specify how models should be created
+            </summary>
+            <param name="modelBuilder">The model builder</param>
         </member>
         <member name="T:JobSearchApi.Entities.Person">
             <summary>
@@ -60,7 +156,7 @@
             The system id of the profile
             </summary>
         </member>
-        <member name="P:JobSearchApi.Entities.PersonProfile.PersonID">
+        <member name="P:JobSearchApi.Entities.PersonProfile.PersonId">
             <summary>
             The system id of the person to whom this profile belong
             </summary>
@@ -73,6 +169,66 @@
         <member name="P:JobSearchApi.Entities.PersonProfile.Password">
             <summary>
             The password of the person
+            </summary>
+        </member>
+        <member name="T:JobSearchApi.Entities.PersonJobSearch">
+            <summary>
+            The job search entered by a person
+            </summary>
+        </member>
+        <member name="P:JobSearchApi.Entities.PersonJobSearch.Id">
+            <summary>
+            The system id
+            </summary>
+        </member>
+        <member name="P:JobSearchApi.Entities.PersonJobSearch.PersonId">
+            <summary>
+            The system id of the person
+            </summary>
+        </member>
+        <member name="P:JobSearchApi.Entities.PersonJobSearch.JobTitle">
+            <summary>
+            The title of the job to seach for
+            </summary>
+        </member>
+        <member name="P:JobSearchApi.Entities.PersonJobSearch.JobTypeId">
+            <summary>
+            The system id of the job type
+            </summary>
+        </member>
+        <member name="P:JobSearchApi.Entities.PersonJobSearch.JobLocation">
+            <summary>
+            The job location
+            </summary>
+        </member>
+        <member name="P:JobSearchApi.Entities.PersonJobSearch.PostedDate">
+            <summary>
+            Filter by jobs posted on or before this date
+            </summary>
+        </member>
+        <member name="P:JobSearchApi.Entities.PersonJobSearch.JobType">
+            <summary>
+            The job type
+            </summary>
+        </member>
+        <member name="P:JobSearchApi.Entities.PersonJobSearch.Person">
+            <summary>
+            The person
+            </summary>
+        </member>
+        <member name="T:JobSearchApi.Entities.JobType">
+            <summary>
+            The types of jobs
+            </summary>
+        </member>
+        <member name="P:JobSearchApi.Entities.JobType.Id">
+            <summary>
+            The system id
+            </summary>
+        </member>
+        <member name="P:JobSearchApi.Entities.JobType.Description">
+            <summary>
+            The job search description
             </summary>
         </member>
         <member name="T:JobSearchApi.IRepository`1">
@@ -120,6 +276,21 @@
         <member name="T:JobSearchApi.IUnitOfWork">
             <summary>
             The unit of work
+            </summary>
+        </member>
+        <member name="P:JobSearchApi.IUnitOfWork.PersonRepository">
+            <summary>
+            The person repository
+            </summary>
+        </member>
+        <member name="P:JobSearchApi.IUnitOfWork.PersonJobSearchRepository">
+            <summary>
+            The person job search repository
+            </summary>
+        </member>
+        <member name="M:JobSearchApi.IUnitOfWork.Save">
+            <summary>
+            Save the data to the database
             </summary>
         </member>
         <member name="T:JobSearchApi.Repository`1">
@@ -190,11 +361,31 @@
             The database context
             </summary>
         </member>
+        <member name="F:JobSearchApi.UnitOfWork._personRepository">
+            <summary>
+            The person repository
+            </summary>
+        </member>
+        <member name="F:JobSearchApi.UnitOfWork._personJobSearchRepository">
+            <summary>
+            The person job search repository
+            </summary>
+        </member>
         <member name="M:JobSearchApi.UnitOfWork.#ctor(JobSearchApi.Data.DatabaseContext)">
             <summary>
             Default constructor
             </summary>
             <param name="context">The database object</param>
+        </member>
+        <member name="P:JobSearchApi.UnitOfWork.PersonRepository">
+            <summary>
+            The person repository
+            </summary>
+        </member>
+        <member name="P:JobSearchApi.UnitOfWork.PersonJobSearchRepository">
+            <summary>
+            The person job search repository
+            </summary>
         </member>
         <member name="M:JobSearchApi.UnitOfWork.Save">
             <summary>
@@ -205,6 +396,18 @@
             <summary>
             Dispose the object
             </summary>
+        </member>
+        <member name="T:JobSearchApi.Utilities.Utility">
+            <summary>
+            Utility class
+            </summary>
+        </member>
+        <member name="M:JobSearchApi.Utilities.Utility.HashPassword(System.String)">
+            <summary>
+            Hashes the given password
+            </summary>
+            <param name="password">The password to be hashed</param>
+            <returns>The hashed password</returns>
         </member>
     </members>
 </doc>
